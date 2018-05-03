@@ -1,21 +1,40 @@
 <template>
     <div class="admin-new-post-page">
         <section class="new-post-form">
-            <form>
-                
-            </form>
+            <admin-post-form/>
         </section>
     </div>
 </template>
 
 <script>
+import AdminPostForm from '@/components/Admin/AdminPostForm'
+
 export default {
-  
+    layout: 'admin',
+    data() {
+        return {
+        }
+    },
+    methods: {
+        
+    },
+    components: {
+        'admin-post-form': AdminPostForm
+    }
 }
 </script>
 
 <style scoped>
+.new-post-form {
+  width: 90%;
+  margin: 20px auto;
+}
 
+@media (min-width: 768px) {
+.new-post-form {
+    width: 500px;
+  }
+}
 </style>
 
 
