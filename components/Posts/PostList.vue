@@ -1,25 +1,13 @@
 <template>
   <section class="post-list">
       <post-preview 
-        id="1" 
+        v-for="post in posts"
+        :key="post.id"
+        :id="post.id"
         :is-admin="isAdmin"
-        title="Hello There" 
-        previewText="1st Post" 
-        thumbnail="https://cdna.artstation.com/p/assets/images/images/001/705/970/large/quy-n-anh-yellow-house-03.jpg?1451367032"
-      />
-      <post-preview 
-        id="2" 
-        :is-admin="isAdmin"
-        title="Hello There" 
-        previewText="2nd Post" 
-        thumbnail="https://orig00.deviantart.net/c373/f/2016/237/4/f/voxel_truss_house_by_mendelian-daf8pdp.png"
-      />
-      <post-preview 
-        id="3" 
-        :is-admin="isAdmin"
-        title="Hello There" 
-        previewText="3rd Post" 
-        thumbnail="https://img.itch.zone/aW1nLzk4Mjg2NC5wbmc=/original/%2BILFTt.png"
+        :title="post.title" 
+        :previewText="post.previewText" 
+        :thumbnail="post.thumbnailLink"
       />
   </section>
 </template>
@@ -32,10 +20,19 @@ export default {
     isAdmin: {
       type: Boolean,
       default: false
+    },
+    posts: {
+      type: Array,
+      requried: true
     }
   },
     components: {
         'post-preview': PostPreview
+    },
+    data() {
+      return {
+        
+      }
     }
 }
 </script>
