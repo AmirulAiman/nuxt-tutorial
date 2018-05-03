@@ -44,7 +44,7 @@ export default {
             thumbnailLink: 'https://i.ytimg.com/vi/AD834QHtbfU/maxresdefault.jpg'
           }]
       })
-    })
+    },1500)
   },
   // data() {
   //   return {
