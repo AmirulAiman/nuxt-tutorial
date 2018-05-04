@@ -1,12 +1,12 @@
 <template>
   <div class="single-post-page">
       <section class="post">
-          <h1 class="post-title">{{ loadedPosts.title }}</h1>
+          <h1 class="post-title">{{ loadedPost.title }}</h1>
           <div class="post-details">
-              <div class="post-detail">Last Updated on {{ loadedPosts.updatedDate }}</div>
-              <div class="post-detail">Written by {{ loadedPosts.author }}</div>
+              <div class="post-detail">Last Updated on {{ loadedPost.updatedDate }}</div>
+              <div class="post-detail">Written by {{ loadedPost.author }}</div>
           </div>
-          <p>{{ loadedPosts.content }}</p>
+          <p>{{ loadedPost.content }}</p>
       </section>
       <section class="post-feedback">
           <p>feedback</p>
@@ -15,22 +15,19 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  asyncData(context, callback){
-    console.info('context info:', context)
-    setTimeout(() => {
-      callback(null, {
-        loadedPosts: {
-          id: '1',
-          author: 'Amirul Aiman Abdullah',
-          previewText: 'This is my first post',
-          title: 'My First Post(ID:' + context.route.params.id +')',
-          thumnail:'https://78.media.tumblr.com/ddc5fd4673723188622d6c238f6b4ac0/tumblr_outtddRBI71v9x50oo1_500.gif',
-          updatedDate: new Date().toDateString(),
-          content: 'all text in my first post'
+  asyncData(context){
+    return axios.get('https://udemy-nuxt-4fc5d.firebaseio.com/posts/' + context.params.id + '.json')
+      .then( result => {
+        return {
+          loadedPost: result.data
         }
       })
-    }, 1000);
+      .catch( e => {
+        console.warn( context.error(e))
+      })
   }
 }
 </script>

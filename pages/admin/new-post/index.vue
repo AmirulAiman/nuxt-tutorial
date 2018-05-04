@@ -18,9 +18,13 @@ export default {
     },
     methods: {
         onSubmitted(postData) {
-            axios.post('https://udemy-nuxt-4fc5d.firebaseio.com/posts.json', postData)
+            axios.post('https://udemy-nuxt-4fc5d.firebaseio.com/posts.json', 
+                {
+                    ...postData, 
+                    updatedDate: new Date().toLocaleDateString()
+                })
                 .then( result => {
-                    console.info(result)
+                    this.$router.push("/admin");
                 })
                 .catch( e => {
                     console.warn(e)

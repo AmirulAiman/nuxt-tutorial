@@ -22,7 +22,7 @@ const createStore = () => {
                         vuexContext.commit('setPosts', postArray)
                     })
                     .catch( e => {
-                        context.warn('error:',e)
+                        console.warn('error:',e)
                     })
             },
             setPosts(vuexContext, posts){
