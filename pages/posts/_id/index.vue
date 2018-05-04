@@ -1,12 +1,12 @@
 <template>
   <div class="single-post-page">
       <section class="post">
-          <h1 class="post-title">Title</h1>
+          <h1 class="post-title">{{ loadedPosts.title }}</h1>
           <div class="post-details">
-              <div class="post-detail">Last Updated on DATE</div>
-              <div class="post-detail">Written by NAME</div>
+              <div class="post-detail">Last Updated on {{ loadedPosts.updatedDate }}</div>
+              <div class="post-detail">Written by {{ loadedPosts.author }}</div>
           </div>
-          <p>Content</p>
+          <p>{{ loadedPosts.content }}</p>
       </section>
       <section class="post-feedback">
           <p>feedback</p>
@@ -16,7 +16,22 @@
 
 <script>
 export default {
-  
+  asyncData(context, callback){
+    console.info('context info:', context)
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: {
+          id: '1',
+          author: 'Amirul Aiman Abdullah',
+          previewText: 'This is my first post',
+          title: 'My First Post(ID:' + context.route.params.id +')',
+          thumnail:'https://78.media.tumblr.com/ddc5fd4673723188622d6c238f6b4ac0/tumblr_outtddRBI71v9x50oo1_500.gif',
+          updatedDate: new Date().toDateString(),
+          content: 'all text in my first post'
+        }
+      })
+    }, 1000);
+  }
 }
 </script>
 
