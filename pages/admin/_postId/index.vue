@@ -17,7 +17,7 @@ export default {
         return axios.get('https://udemy-nuxt-4fc5d.firebaseio.com/posts/' + context.params.postId + '.json')
         .then( result => {
             return {
-            loadedPost: result.data
+            loadedPost: { ...result.data, id: context.params.postId }
             }
         })
         .catch( e => {
@@ -26,17 +26,10 @@ export default {
     },
     methods:{
         onSubmitted(editedPost){
-            axios.put('https://udemy-nuxt-4fc5d.firebaseio.com/posts/' + this.$route.params.postId + '.json',
-            {
-                ...editedPost,
-                updatedDate: new Date().toLocaleDateString()
-            })
-            .then( result => {
-                this.$router.push('/admin');
-            })
-            .catch( e => {
-                console.warn( context.error(e) )
-            })
+            this.$store.dispatch('editPost', editedPost)
+                .then( () => {
+                    this.$router.push('/admin');
+                })
         }
     },
     components: {
