@@ -1,12 +1,13 @@
 <template>
     <div class="admin-new-post-page">
         <section class="new-post-form">
-            <admin-post-form/>
+            <admin-post-form @submit="onSubmitted"/>
         </section>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 import AdminPostForm from '@/components/Admin/AdminPostForm'
 
 export default {
@@ -16,7 +17,15 @@ export default {
         }
     },
     methods: {
-        
+        onSubmitted(postData) {
+            axios.post('https://udemy-nuxt-4fc5d.firebaseio.com/posts.json', postData)
+                .then( result => {
+                    console.info(result)
+                })
+                .catch( e => {
+                    console.warn(e)
+                })
+        }
     },
     components: {
         'admin-post-form': AdminPostForm

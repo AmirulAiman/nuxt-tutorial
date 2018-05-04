@@ -16,7 +16,12 @@
                 control-type="textarea"
                 v-model="editedPost.content">
             Content
-        </app-control-input>        
+        </app-control-input>
+        <app-control-input
+                control-type="textarea"
+                v-model="editedPost.previewText">
+            Preview Text
+        </app-control-input>
         <app-button type="submit">Save</app-button>
         <app-button
         type="button"
@@ -45,15 +50,15 @@ export default {
                 author: '',
                 title: '',
                 thumbnailLink: '',
-                content: ''
+                content: '',
+                previewText: ''
             }
         }
     },
     methods: {
         onSave(){
             //save post
-            console.log('Save post');
-            console.log('saved post:', this.editedPost);
+            this.$emit('submit', this.editedPost)
         },
         onCancel(){
             //navigate back
